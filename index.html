@@ -2,20 +2,13 @@
 <html>
 <head>
     <title>Pastebin</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Pastebin</h1>
-        <form action="{{ url_for('paste') }}" method="POST">
-            <textarea name="content" placeholder="Enter your text here"></textarea>
-            <button type="submit">Paste</button>
-        </form>
-        <div class="pastes">
-            {% for paste in pastes %}
-                <div class="paste">{{ paste.content }}</div>
-            {% endfor %}
-        </div>
-    </div>
+    <h1>Create a New Paste</h1>
+    <form action="/create_paste" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <textarea name="content" rows="10" cols="50"></textarea><br>
+        <input type="submit" value="Create Paste">
+    </form>
 </body>
 </html>
